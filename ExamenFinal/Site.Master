@@ -1,0 +1,129 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="ExamenFinal.Site" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link rel="stylesheet" href='<%= ResolveUrl("~/CSS/master.css") %>' />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .header-container {
+            color: #fff;
+            padding: 15px;
+            position: relative;
+        }
+
+        .menu-toggle {
+            width: 50px;
+            height: 50px;
+            background-color: #1cb4ff;
+            color: #fff;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 50px;
+            cursor: pointer;
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            z-index: 1000;
+            border: none;
+            outline: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+        }
+
+            .menu-toggle:hover {
+                background-color: #0e88c1;
+            }
+
+        #sidebar {
+            position: absolute;
+            top: 70px;
+            left: 15px;
+            background-color: #fff;
+            width: 0;
+            height: 0;
+            border-radius: 50%; /* Hacer el menú circular */
+            overflow: hidden;
+            transition: width 0.3s ease, height 0.3s ease, border-radius 0.3s ease; /* Agregar la transición para el radio de borde */
+            z-index: 999;
+        }
+
+            #sidebar.active {
+                width: 200px;
+                height: 200px;
+                border-radius: 50%; /* Mantener el menú circular cuando está activo */
+                padding: 20px;
+                background-color: #1cb4ff;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+
+
+            #sidebar ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                text-align: center;
+            }
+
+                #sidebar ul li {
+                    margin-bottom: 10px;
+                }
+
+                    #sidebar ul li a {
+                        color: #fff;
+                        text-decoration: none;
+                        font-size: 16px;
+                        transition: color 0.3s ease;
+                    }
+
+                        #sidebar ul li a:hover {
+                            color: #0e88c1;
+                        }
+
+        .content-container {
+            padding-top: 110px;
+            text-align: center;
+        }
+    </style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="header-container">
+            <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        </div>
+        <div class="content-container">
+            <div class="content">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    <!-- El contenido de las páginas individuales se insertará aquí -->
+                </asp:ContentPlaceHolder>
+            </div>
+            <nav id="sidebar">
+                <ul>
+                    <li><a href="Menuprincipal.aspx">Inicio</a></li>
+                    <li><a href="Agente_Vista.aspx">Agentes</a></li>
+                    <li><a href="Clientes_View.aspx">Clientes</a></li>
+                    <li><a href="Venta_View.aspx">Ventas</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <script>
+            function toggleMenu() {
+                var sidebar = document.getElementById('sidebar');
+                sidebar.classList.toggle('active');
+                document.querySelector('.menu-toggle').classList.toggle('active');
+            }
+        </script>
+    </form>
+</body>
+</html>
